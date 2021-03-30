@@ -1,5 +1,6 @@
 {
   "name": "reading-list",
+  "type": "module",
   "version": "1.0.0",
   "description": "Personalised reading list",
   "main": "index.js",
@@ -7,9 +8,8 @@
   "author": "Tarun Soni <soni.tarun26@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node backend/server",
     "server": "nodemon backend/server",
-    "client": "npm start --prefix frontend",
+    "client": "npm run start --prefix frontend",
     "dev": "concurrently \"npm run server \" \"npm run client"
   },
   "devDependencies": {
@@ -17,6 +17,8 @@
     "prettier": "2.2.1"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
   }
 }
