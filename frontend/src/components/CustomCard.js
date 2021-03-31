@@ -1,21 +1,23 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-const CustomCard = ({ book: { volumeInfo } }) => {
+import ReadMoreAndLess from 'react-read-more-less'
+import { Link } from 'react-router-dom'
+
+const CustomCard = ({ book }) => {
   return (
     <>
-      {console.log('book :>> ', volumeInfo)}
-      <Card className="m-3 " style={{ maxWidth: '20rem' }}>
-        <Card.Header className="p-3">{volumeInfo?.title}</Card.Header>
+      <Card className="m-3 card-hover" style={{ maxWidth: '20rem' }}>
+        <Card.Header className="p-3">{book?.volumeInfo?.title}</Card.Header>
 
         <div
           className="d-flex p-3 align-center justify-content-center"
           style={{ height: '15rem' }}
         >
-          {volumeInfo?.imageLinks.smallThumbnail ? (
+          {book?.volumeInfo?.imageLinks.smallThumbnail ? (
             <Card.Img
               className="border-black"
               style={{ width: 'auto' }}
-              src={volumeInfo?.imageLinks?.smallThumbnail}
+              src={book?.volumeInfo?.imageLinks?.smallThumbnail}
             />
           ) : (
             <svg
@@ -39,51 +41,40 @@ const CustomCard = ({ book: { volumeInfo } }) => {
         </div>
 
         <Card.Body>
-          <Card.Text>{volumeInfo?.description || 'No desc'}</Card.Text>
+          <div className="card--desc">
+            {book?.volumeInfo.description != null ? (
+              <ReadMoreAndLess
+                className="read-more-content"
+                charLimit={120}
+                readMoreText="  Read more"
+                readLessText="  Read less"
+              >
+                {book?.volumeInfo?.description}
+              </ReadMoreAndLess>
+            ) : (
+              'no desc'
+            )}
+          </div>
         </Card.Body>
         <Card.Body>
           <Card.Link
             target="_blank"
-            href={volumeInfo?.previewLink}
+            href={book?.volumeInfo?.previewLink}
             className="card-link"
           >
             Preview link
           </Card.Link>
-          <Card.Link href={volumeInfo?.previewLink} className="card-link">
-            Preview link
+          <Card.Link className="card-link">
+            <Link to={`/book/${book.id}`}>More Info</Link>
           </Card.Link>
         </Card.Body>
 
         <Card.Footer className="text-muted">
-          {volumeInfo?.categories?.map((c) => (
+          {book?.volumeInfo?.categories?.map((c) => (
             <p> Categories: {c}</p>
           ))}
         </Card.Footer>
       </Card>
-
-      {/* <div class="card" style={{ width: '18rem' }}>
-        <Card.Img
-          className="border-black p-3 align-self-center"
-          style={{ width: 'auto', minHeight: '10rem' }}
-          src={book?.volumeInfo?.imageLinks?.smallThumbnail}
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-
-        <div class="card-body">
-          <a href="#" class="card-link">
-            Card link
-          </a>
-          <a href="#" class="card-link">
-            Another link
-          </a>
-        </div>
-      </div> */}
     </>
   )
 }
