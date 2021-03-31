@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import axios from 'axios'
 import CustomCard from '../components/CustomCard'
 import SearchBox from '../components/SearchBox'
 const HomeScreen = () => {
   const [bookInput, setBookInput] = useState('harry potter')
   const [books, setBooks] = useState()
-  // const [apiKey] = useState(process.env.REACT_APP_GBOOK_API_KEY)
 
   async function getData() {
     const { data: apiKey } = await axios.get('/api/config/bookKey')
@@ -30,9 +29,9 @@ const HomeScreen = () => {
         getData={getData}
       />
       <Row>
-        {books?.map((book, index) => (
+        {books?.map((book) => (
           <>
-            <CustomCard book={book} />
+            <CustomCard key={book.id} book={book} />
           </>
         ))}{' '}
       </Row>

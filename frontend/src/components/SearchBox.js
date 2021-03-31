@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
 const SearchBox = ({ bookInput, setBookInput, getData }) => {
@@ -10,6 +9,7 @@ const SearchBox = ({ bookInput, setBookInput, getData }) => {
   return (
     <Form onSubmit={submitHandler} inline>
       <Form.Control
+        value={bookInput}
         type="text"
         name="q"
         onChange={(e) => setBookInput(e.target.value)}
