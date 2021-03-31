@@ -1,21 +1,21 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-const CustomCard = ({ book }) => {
+const CustomCard = ({ book: { volumeInfo } }) => {
   return (
     <>
-      {console.log('book :>> ', book)}
+      {console.log('book :>> ', volumeInfo)}
       <Card className="m-3 " style={{ maxWidth: '20rem' }}>
-        <Card.Header className="p-3">{book?.volumeInfo?.title}</Card.Header>
+        <Card.Header className="p-3">{volumeInfo?.title}</Card.Header>
 
         <div
           className="d-flex p-3 align-center justify-content-center"
           style={{ height: '15rem' }}
         >
-          {book?.volumeInfo?.imageLinks.smallThumbnail ? (
+          {volumeInfo?.imageLinks.smallThumbnail ? (
             <Card.Img
               className="border-black"
               style={{ width: 'auto' }}
-              src={book?.volumeInfo?.imageLinks?.smallThumbnail}
+              src={volumeInfo?.imageLinks?.smallThumbnail}
             />
           ) : (
             <svg
@@ -39,21 +39,26 @@ const CustomCard = ({ book }) => {
         </div>
 
         <Card.Body>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
+          <Card.Text>{volumeInfo?.description || 'No desc'}</Card.Text>
         </Card.Body>
         <Card.Body>
-          <a href="#/" className="card-link">
-            Card link
-          </a>
-          <a href="#/" className="card-link">
-            Another link
-          </a>
+          <Card.Link
+            target="_blank"
+            href={volumeInfo?.previewLink}
+            className="card-link"
+          >
+            Preview link
+          </Card.Link>
+          <Card.Link href={volumeInfo?.previewLink} className="card-link">
+            Preview link
+          </Card.Link>
         </Card.Body>
 
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+        <Card.Footer className="text-muted">
+          {volumeInfo?.categories?.map((c) => (
+            <p> Categories: {c}</p>
+          ))}
+        </Card.Footer>
       </Card>
 
       {/* <div class="card" style={{ width: '18rem' }}>
