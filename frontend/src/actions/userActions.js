@@ -2,6 +2,9 @@ import axios from 'axios'
 
 const registerUser = (formData) => {}
 
+const logoutUser = async () => {
+  localStorage.removeItem('userToken')
+}
 const loginUser = async (email, password) => {
   try {
     const config = {
@@ -23,4 +26,4 @@ const loginUser = async (email, password) => {
     console.log('err :>> ', err)
   }
 }
-export { loginUser }
+export { loginUser, logoutUser }
