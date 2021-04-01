@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
+import bookRoutes from './routes/bookRoutes.js'
 const app = express()
 
 app.use(express.json())
@@ -11,6 +12,7 @@ connectDB()
 app.use(cors())
 
 app.use('/api/users', userRoutes)
+app.use('/api/book', bookRoutes)
 
 app.get('/api/config/bookKey', (req, res) => {
   res.send(process.env.REACT_APP_GBOOK_API_KEY)
