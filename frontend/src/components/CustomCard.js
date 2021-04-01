@@ -1,12 +1,11 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import ReadMoreAndLess from 'react-read-more-less'
-import { Link } from 'react-router-dom'
 
 const CustomCard = ({ book }) => {
   return (
     <>
-      <Card className="m-3 card-hover" style={{ maxWidth: '20rem' }}>
+      <Card className="m-3 card-hover" style={{ width: '20rem' }}>
         <Card.Header className="p-3">{book?.volumeInfo?.title}</Card.Header>
 
         <div
@@ -56,22 +55,20 @@ const CustomCard = ({ book }) => {
             )}
           </div>
         </Card.Body>
+
+        {/* todo make these both btns more prominent */}
         <Card.Body>
-          <Card.Link
-            target="_blank"
-            href={book?.volumeInfo?.previewLink}
-            className="card-link"
-          >
+          <Card.Link target="_blank" href={book?.volumeInfo?.previewLink}>
             Preview link
           </Card.Link>
-          <Card.Link className="card-link">
-            <Link to={`/book/${book.id}`}>More Info</Link>
-          </Card.Link>
+          {/* <Link className="pl-2" to={`/book/${book.id}`}>
+            <Card.Link>More Info</Card.Link>
+          </Link> */}
         </Card.Body>
 
         <Card.Footer className="text-muted">
-          {book?.volumeInfo?.categories?.map((c) => (
-            <p> Categories: {c}</p>
+          {book?.volumeInfo?.categories?.map((c, index) => (
+            <p key={index}> Categories: {c}</p>
           ))}
         </Card.Footer>
       </Card>

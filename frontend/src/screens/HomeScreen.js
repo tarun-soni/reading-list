@@ -30,9 +30,7 @@ const HomeScreen = () => {
       />
       <Row>
         {books?.map((book) => (
-          <>
-            <CustomCard key={book.id} book={book} />
-          </>
+          <CustomCard key={book?.id} book={book} />
         ))}{' '}
       </Row>
     </>
