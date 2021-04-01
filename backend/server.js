@@ -1,11 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import connectDB from './config/db.js'
 const app = express()
 
 app.use(express.json())
 dotenv.config()
-
+connectDB()
 app.use(cors())
 
 app.get('/api/config/bookKey', (req, res) => {
@@ -17,6 +18,7 @@ app.listen(
   PORT,
   console.log(`server running in ${process.env.NODE_ENV} env on  port ${PORT}`)
 )
+
 if (process.env.NODE_ENV === 'production') {
   //set frontend/build as static folder
   app.use(express.static(path.join(__dirname, '/frontend/build')))
