@@ -19,10 +19,9 @@ const Register = () => {
     dispatch(register(formData))
   }
 
-  // if (isAuthenticated) {
-  //   return <Redirect to="/notes" />
-  // }
-
+  if (userInfo.isAuthenticated || localStorage.getItem('userToken')) {
+    return <Redirect to="/homescreen" />
+  }
   return (
     <>
       <div className="container">

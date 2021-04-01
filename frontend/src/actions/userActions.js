@@ -17,9 +17,8 @@ const loginUser = async (email, password) => {
     )
     console.log('userlogindata :>> ', data)
 
-    if (data) {
-    }
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    if (data) return data
+    else return null
   } catch (err) {
     console.log('err :>> ', err)
   }

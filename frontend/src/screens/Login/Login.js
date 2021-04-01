@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
 import { loginUser } from '../../actions/userActions.js'
-import './cssLogin.css'
+import { userInfoState } from '../../store/login.js'
+import './cssLogin.scss'
 
 const Login = () => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -15,12 +18,25 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   const onSubmit = async (e) => {
     e.preventDefault()
-    console.log('clicked')
-    loginUser(email, password)
+    const loginInfo = await loginUser(email, password)
+    if (loginInfo) {
+      setUserInfo({
+        userId: loginInfo._id,
+        isAuthenticated: true,
+        token: loginInfo.token,
+        name: loginInfo.name,
+        email: loginInfo.email
+      })
+      localStorage.setItem('userToken', JSON.stringify(loginInfo.token))
+    }
+    if (loginInfo === undefined || null) {
+      // todo wrong email pass alert popup
+    }
   }
-  // if (isAuthenticated) {
-  //   return <Redirect to="/homepage" />
-  // }
+
+  if (userInfo.isAuthenticated || localStorage.getItem('userToken')) {
+    return <Redirect to="/homescreen" />
+  }
 
   return (
     <>
