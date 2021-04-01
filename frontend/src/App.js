@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import BookDetails from './screens/BookDetails'
+import Login from './screens/Login/Login.js'
 
 const App = () => {
   return (
@@ -12,7 +13,8 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Container>
-          <Route path="/" component={HomeScreen} exact />
+          <Route path="/login" component={Login} exact />
+          <Route path="/homescreen" component={HomeScreen} exact />
           <Route path="/book/:id" component={BookDetails} exact />
         </Container>
       </main>

@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+.form-container {
+  background-color: #fff;
+  border-radius: 3px;
+  border: 20px solid #dce7ff;
+  width: 1000px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.login-form {
+  border-right: 1px solid #ecf2ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  flex: 1;
+}
+
+.features {
+  flex: 1;
+  padding: 40px;
+}
+
+.feature {
+  position: relative;
+  padding-left: 30px;
+  margin: 40px 0;
+}
+
+.feature i {
+  color: #2762eb;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
+.feature h3 {
+  margin: 0;
+}
+
+.feature p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  form {
+    border-right: 0;
+  }
+}
