@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Alert, Card, NavLink } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, NavLink } from 'react-bootstrap'
 import ReadMoreAndLess from 'react-read-more-less'
 import { useRecoilState } from 'recoil'
-import { addBook } from '../actions/bookActions.js'
+import { getUserById } from '../actions/userActions.js'
 import { userInfoState } from '../store/login.js'
 const CustomCard = ({ book }) => {
   return (
@@ -94,24 +94,32 @@ export default CustomCard
 const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
   const [userInfo] = useRecoilState(userInfoState)
   const [showPlsLoginAlert, setShowPlsLoginAlert] = useState(false)
+  useEffect(() => {
+    const getData = async () => {
+      const responseID = await getUserById(userInfo.userId)
+      console.log('responseID :>> ', responseID)
+    }
+    getData()
+  }, [userInfo])
+
   const addBookFunction = async () => {
     console.log('clicked')
     // todo add user from get user
-    const bookData = {
-      user: userInfo,
-      title: 'demo-title from ui',
-      description: 'demo desc from ui',
-      imageUrl: '',
-      bookId: '1234'
-    }
+    // const bookData = {
+    //   user: userInfo,
+    //   title: 'demo-title from ui',
+    //   description: 'demo desc from ui',
+    //   imageUrl: '',
+    //   bookId: '1234'
+    // }
 
-    if (!userInfo.isAuthenticated) {
-      // todo show alert pls login
-      setShowPlsLoginAlert(true)
-    } else {
-      const response = await addBook(bookData)
-      console.log('response :>> ', response)
-    }
+    // if (!userInfo.isAuthenticated) {
+    //   // todo show alert pls login
+    //   setShowPlsLoginAlert(true)
+    // } else {
+    //   const response = await addBook(bookData)
+    //   console.log('response :>> ', response)
+    // }
   }
 
   return (

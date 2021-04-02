@@ -26,4 +26,24 @@ const loginUser = async (email, password) => {
     console.log('err :>> ', err)
   }
 }
-export { loginUser, logoutUser }
+
+const getUserById = async (id) => {
+  const token = localStorage.getItem('userToken')
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  }
+  try {
+    const response = await axios.get(`/api/users/${id}`, config)
+    console.log('user :>> ', response)
+
+    // if (data) return data
+    // else return null
+  } catch (err) {
+    console.log('err :>> ', err)
+  }
+}
+
+export { loginUser, logoutUser, getUserById }
