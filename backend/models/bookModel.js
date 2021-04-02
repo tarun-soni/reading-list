@@ -16,6 +16,10 @@ const bookSchema = mongoose.Schema(
     },
     imageUrl: {
       type: String
+    },
+    bookId: {
+      type: String,
+      required: true
     }
   },
   {

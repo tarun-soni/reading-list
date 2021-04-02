@@ -1,12 +1,16 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Alert, Card, NavLink } from 'react-bootstrap'
 import ReadMoreAndLess from 'react-read-more-less'
-
+import { useRecoilState } from 'recoil'
+import { addBook } from '../actions/bookActions.js'
+import { userInfoState } from '../store/login.js'
 const CustomCard = ({ book }) => {
   return (
     <>
       <Card className="m-3 card-hover" style={{ width: '20rem' }}>
-        <Card.Header className="p-3">{book?.volumeInfo?.title}</Card.Header>
+        <Card.Header className="p-3 d-flex">
+          {book?.volumeInfo?.title}
+        </Card.Header>
 
         <div
           className="d-flex p-3 align-center justify-content-center"
@@ -57,13 +61,22 @@ const CustomCard = ({ book }) => {
         </Card.Body>
 
         {/* todo make these both btns more prominent */}
-        <Card.Body>
+        <Card.Body
+          className="d-flex align-items-center justify-content-between"
+          style={{ height: '3rem' }}
+        >
           <Card.Link target="_blank" href={book?.volumeInfo?.previewLink}>
             Preview link
           </Card.Link>
-          {/* <Link className="pl-2" to={`/book/${book.id}`}>
+          <NavLink to={`/book/${book.id}`}>
             <Card.Link>More Info</Card.Link>
-          </Link> */}
+          </NavLink>
+
+          <AddBookBtn
+            bookId={book?.id}
+            title={book?.title}
+            desc={book?.description}
+          />
         </Card.Body>
 
         <Card.Footer className="text-muted">
@@ -77,3 +90,47 @@ const CustomCard = ({ book }) => {
 }
 
 export default CustomCard
+
+const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
+  const [userInfo] = useRecoilState(userInfoState)
+  const [showPlsLoginAlert, setShowPlsLoginAlert] = useState(false)
+  const addBookFunction = async () => {
+    console.log('clicked')
+    // todo add user from get user
+    const bookData = {
+      user: userInfo,
+      title: 'demo-title from ui',
+      description: 'demo desc from ui',
+      imageUrl: '',
+      bookId: '1234'
+    }
+
+    if (!userInfo.isAuthenticated) {
+      // todo show alert pls login
+      setShowPlsLoginAlert(true)
+    } else {
+      const response = await addBook(bookData)
+      console.log('response :>> ', response)
+    }
+  }
+
+  return (
+    <>
+      {showPlsLoginAlert && (
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">
+            &times;
+          </button>
+          <strong>Oh snap!</strong>{' '}
+          <a href="#" class="alert-link">
+            Change a few things up
+          </a>{' '}
+          and try submitting again.
+        </div>
+      )}
+      <div className="btn-div px-2" onClick={addBookFunction}>
+        <i className="fa fa-plus p-2" />
+      </div>
+    </>
+  )
+}

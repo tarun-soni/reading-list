@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const registerUser = (formData) => {}
+// const registerUser = (formData) => {}
 
 const logoutUser = async () => {
   localStorage.removeItem('userToken')
