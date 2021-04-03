@@ -46,7 +46,7 @@ const HomeScreen = () => {
       }
     }
     getData()
-    //eslint-disable
+    // eslint-disable-next-line
   }, [])
   return (
     <>
@@ -54,12 +54,12 @@ const HomeScreen = () => {
         <Col md={8}>
           <h3>Books</h3>
         </Col>
+        <SearchBox
+          bookInput={bookInput}
+          setBookInput={setBookInput}
+          getData={getData}
+        />
       </Row>
-      <SearchBox
-        bookInput={bookInput}
-        setBookInput={setBookInput}
-        getData={getData}
-      />
       <Row>
         {books?.map((book) => (
           <CustomCard

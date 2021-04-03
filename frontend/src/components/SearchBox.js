@@ -1,5 +1,4 @@
 import React from 'react'
-import { Form, Button } from 'react-bootstrap'
 
 const SearchBox = ({ bookInput, setBookInput, getData }) => {
   const submitHandler = (e) => {
@@ -7,19 +6,18 @@ const SearchBox = ({ bookInput, setBookInput, getData }) => {
     getData()
   }
   return (
-    <Form onSubmit={submitHandler} inline>
-      <Form.Control
+    <form class="form-inline my-2 my-lg-0" onSubmit={submitHandler}>
+      <input
         value={bookInput}
-        type="text"
-        name="q"
         onChange={(e) => setBookInput(e.target.value)}
-        placeholder="Search Products..."
-        className="mr-sm-2 ml-sm-5"
-      ></Form.Control>
-      <Button type="submit" variant="success" className="p-2 btn-sm">
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Search Books"
+      />
+      <button class="btn btn-primary my-2 my-sm-0" type="submit">
         Search
-      </Button>
-    </Form>
+      </button>
+    </form>
   )
 }
 
