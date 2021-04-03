@@ -4,10 +4,18 @@ import { Col, Row } from 'react-bootstrap'
 import axios from 'axios'
 import CustomCard from '../components/CustomCard/CustomCard'
 import SearchBox from '../components/SearchBox'
+import Message from '../components/Message'
+
+import { useRecoilState } from 'recoil'
+import { removeBookAlert, addedBookAlert, plsLoginAlert } from '../store/alerts'
 const HomeScreen = () => {
   const [bookInput, setBookInput] = useState('harry potter')
-  const [books, setBooks] = useState()
+  const [showPlsLoginAlert, setShowPlsLoginAlert] = useRecoilState(
+    plsLoginAlert
+  )
+  const [addBookAlertState, setAddBookAlert] = useRecoilState(addedBookAlert)
 
+  const [books, setBooks] = useState()
   async function searchSubmit() {
     const { data: apiKey } = await axios.get('/api/config/bookKey')
     // const url = `https://www.googleapis.com/books/v1/volumes?q=${bookInput}&filter=free-ebooks&key=${apiKey}`
@@ -20,15 +28,30 @@ const HomeScreen = () => {
 
   return (
     <>
+      {showPlsLoginAlert && (
+        <Message variant="danger" onClose={() => setShowPlsLoginAlert(false)}>
+          Please Login to add Books
+        </Message>
+      )}
+      {addBookAlertState && (
+        <>
+          <Message variant="success" onClose={() => setAddBookAlert(false)}>
+            Book Added
+          </Message>
+        </>
+      )}
+
       <Row>
-        <Col md={8}>
+        <Col md={4} lg={8}>
           <h3>Books</h3>
         </Col>
-        <SearchBox
-          bookInput={bookInput}
-          setBookInput={setBookInput}
-          searchSubmit={searchSubmit}
-        />
+        <Col>
+          <SearchBox
+            bookInput={bookInput}
+            setBookInput={setBookInput}
+            searchSubmit={searchSubmit}
+          />
+        </Col>
       </Row>
       <Row>
         {books?.map((book, index) => (

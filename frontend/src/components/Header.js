@@ -5,7 +5,12 @@ import { userInfoState } from '../store/login'
 import { useRecoilState } from 'recoil'
 import { logoutUser } from '../actions/userActions'
 import { useHistory } from 'react-router-dom'
+import Message from './Message'
+import CustomToast from './CustomToast'
+import { addedBookAlert } from '../store/alerts'
+
 const Header = () => {
+  const [addBookAlertState, setAddBookAlert] = useRecoilState(addedBookAlert)
   const [userInfo, setUserInfo] = useRecoilState(userInfoState)
   const history = useHistory()
   useEffect(() => {
@@ -25,7 +30,13 @@ const Header = () => {
   }
 
   return (
-    <Navbar className="font-weight-bold" bg="light" collapseOnSelect>
+    <Navbar className="font-weight-bold" bg="light sticky-top" collapseOnSelect>
+      {addBookAlertState && (
+        <>
+          <CustomToast onClick={() => setAddBookAlert(false)} />
+        </>
+      )}
+
       <Container>
         <LinkContainer to="/homescreen">
           <Navbar.Brand>Perosnal Reading App</Navbar.Brand>

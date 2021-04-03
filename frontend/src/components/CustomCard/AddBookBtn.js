@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRecoilState } from 'recoil'
 import { getUserById } from '../../actions/userActions.js'
 import { addBook } from '../../actions/bookActions.js'
 import { userInfoState } from '../../store/login.js'
+import { addedBookAlert, plsLoginAlert } from '../../store/alerts.js'
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 export const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
   const [userInfo] = useRecoilState(userInfoState)
-  const [showPlsLoginAlert, setShowPlsLoginAlert] = useState(false)
+  const [, setShowPlsLoginAlert] = useRecoilState(plsLoginAlert)
+  const [, setAddBookAlert] = useRecoilState(addedBookAlert)
 
   const addBookFunction = async () => {
     const user = await getUserById(userInfo.userId)
@@ -20,30 +22,17 @@ export const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
     }
 
     if (!userInfo.isAuthenticated) {
-      // todo show alert pls login
       setShowPlsLoginAlert(true)
     } else {
       console.log('bookData :>> ', bookData)
       const response = await addBook(bookData)
       console.log('response :>> ', response)
+      setAddBookAlert(true)
     }
   }
 
   return (
     <>
-      {showPlsLoginAlert && (
-        <div className="alert alert-dismissible alert-danger">
-          <button type="button" className="close" data-dismiss="alert">
-            &times;
-          </button>
-          <strong>Oh snap!</strong>{' '}
-          <a href="#/" className="alert-link">
-            Change a few things up
-          </a>{' '}
-          and try submitting again.
-        </div>
-      )}
-
       <OverlayTrigger
         placement="top"
         overlay={<Tooltip id={`tooltip-top`}>Add Book</Tooltip>}
