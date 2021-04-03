@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SearchBox = ({ bookInput, setBookInput, getData }) => {
+const SearchBox = ({ bookInput, setBookInput, searchSubmit }) => {
   const submitHandler = (e) => {
     e.preventDefault()
-    getData()
+    searchSubmit()
   }
   return (
     <form class="form-inline my-2 my-lg-0" onSubmit={submitHandler}>
