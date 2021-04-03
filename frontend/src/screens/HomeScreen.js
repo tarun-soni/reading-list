@@ -62,8 +62,16 @@ const HomeScreen = () => {
       />
       <Row>
         {books?.map((book) => (
-          <CustomCard key={book?.id} book={book} />
-        ))}{' '}
+          <CustomCard
+            key={book?.id}
+            bookId={book?.id}
+            title={book?.volumeInfo?.title}
+            img={book?.volumeInfo?.imageLinks?.smallThumbnail}
+            description={book?.volumeInfo?.description}
+            previewLink={book?.volumeInfo?.previewLink}
+            categories={book?.volumeInfo?.categories}
+          />
+        ))}
       </Row>
     </>
   )

@@ -5,23 +5,28 @@ import { useRecoilState } from 'recoil'
 import { getUserById } from '../actions/userActions.js'
 import { addBook } from '../actions/bookActions.js'
 import { userInfoState } from '../store/login.js'
-const CustomCard = ({ book }) => {
+const CustomCard = ({
+  title,
+  bookId,
+  img,
+  description,
+  previewLink,
+  categories
+}) => {
   return (
     <>
       <Card className="m-3 card-hover" style={{ width: '20rem' }}>
-        <Card.Header className="p-3 d-flex">
-          {book?.volumeInfo?.title}
-        </Card.Header>
+        <Card.Header className="p-3 d-flex">{title}</Card.Header>
 
         <div
           className="d-flex p-3 align-center justify-content-center"
           style={{ height: '15rem' }}
         >
-          {book?.volumeInfo?.imageLinks.smallThumbnail ? (
+          {img ? (
             <Card.Img
               className="border-black"
               style={{ width: 'auto' }}
-              src={book?.volumeInfo?.imageLinks?.smallThumbnail}
+              src={img}
             />
           ) : (
             <svg
@@ -46,14 +51,14 @@ const CustomCard = ({ book }) => {
 
         <Card.Body>
           <div className="card--desc">
-            {book?.volumeInfo.description != null ? (
+            {description != null ? (
               <ReadMoreAndLess
                 className="read-more-content"
                 charLimit={120}
                 readMoreText="  Read more"
                 readLessText="  Read less"
               >
-                {book?.volumeInfo?.description}
+                {description}
               </ReadMoreAndLess>
             ) : (
               'no desc'
@@ -66,23 +71,23 @@ const CustomCard = ({ book }) => {
           className="d-flex align-items-center justify-content-between"
           style={{ height: '3rem' }}
         >
-          <Card.Link target="_blank" href={book?.volumeInfo?.previewLink}>
+          <Card.Link target="_blank" href={previewLink}>
             Preview link
           </Card.Link>
-          <NavLink to={`/book/${book.id}`}>
+          <NavLink to={`/book/${bookId}`}>
             <Card.Link>More Info</Card.Link>
           </NavLink>
 
           <AddBookBtn
-            bookId={book.id}
-            title={book?.volumeInfo?.title}
-            description={book?.volumeInfo.description}
-            imageUrl={book?.volumeInfo?.imageLinks?.smallThumbnail}
+            bookId={bookId}
+            title={title}
+            description={description}
+            imageUrl={img}
           />
         </Card.Body>
 
         <Card.Footer className="text-muted">
-          {book?.volumeInfo?.categories?.map((c, index) => (
+          {categories?.map((c, index) => (
             <p key={index}> Categories: {c}</p>
           ))}
         </Card.Footer>

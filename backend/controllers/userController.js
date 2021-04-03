@@ -33,7 +33,5 @@ const getUserById = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('User Not Found')
   }
-
-  res.json(user)
 })
 export { authUser, getUserById }

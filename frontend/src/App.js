@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import BookDetails from './screens/BookDetails'
 import Login from './screens/Login/Login.js'
+import MyList from './screens/MyList'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Redirect to="/homescreen" />
           </Route>
           <Route path="/homescreen" component={HomeScreen} exact />
+          <Route path="/my-list" component={MyList} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/book/:id" component={BookDetails} exact />
         </Container>
