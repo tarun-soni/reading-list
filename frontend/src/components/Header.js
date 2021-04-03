@@ -4,9 +4,10 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { userInfoState } from '../store/login'
 import { useRecoilState } from 'recoil'
 import { logoutUser } from '../actions/userActions'
+import { useHistory } from 'react-router-dom'
 const Header = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState)
-
+  const history = useHistory()
   useEffect(() => {
     console.log(`userInfo`, userInfo)
   }, [userInfo])
@@ -20,6 +21,7 @@ const Header = () => {
       name: '',
       email: ''
     })
+    history.push('/')
   }
 
   return (

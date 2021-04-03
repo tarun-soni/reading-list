@@ -2,9 +2,11 @@ import axios from 'axios'
 export const addBook = async (bookData) => {
   try {
     // todo add bearer token
+    const token = localStorage.getItem('userToken')
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       }
     }
 

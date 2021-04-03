@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const logoutUser = async () => {
   localStorage.removeItem('userToken')
+  localStorage.removeItem('userId')
 }
 const loginUser = async (email, password) => {
   try {
