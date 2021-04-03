@@ -23,9 +23,11 @@ export const addBook = async (bookData) => {
 
 export const getUserBooks = async (user_id) => {
   try {
+    const token = localStorage.getItem('userToken')
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       }
     }
 
@@ -42,10 +44,13 @@ export const getUserBooks = async (user_id) => {
 
 export const deleteBook = async (book_id) => {
   try {
+    const token = localStorage.getItem('userToken')
+
     console.log('book_id :>> ', book_id)
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       }
     }
 
