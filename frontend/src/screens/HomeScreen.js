@@ -5,9 +5,12 @@ import axios from 'axios'
 import CustomCard from '../components/CustomCard'
 import SearchBox from '../components/SearchBox'
 import { getUserById } from '../actions/userActions'
+import { useRecoilState } from 'recoil'
+import { userInfoState } from '../store/login'
 const HomeScreen = () => {
   const [bookInput, setBookInput] = useState('harry potter')
   const [books, setBooks] = useState()
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState)
 
   async function getData() {
     const { data: apiKey } = await axios.get('/api/config/bookKey')
@@ -22,10 +25,28 @@ const HomeScreen = () => {
     async function getData() {
       if (localStorage.getItem('userId') && localStorage.getItem('userToken')) {
         const res = await getUserById(localStorage.getItem('userId'))
+        setUserInfo({
+          ...userInfo,
+          userId: res?._id,
+          isAuthenticated: true,
+          name: res?.name,
+          email: res?.email
+        })
+
         console.log('res :>> ', res)
+      } else {
+        console.log('logged out')
+        setUserInfo({
+          token: null,
+          userId: null,
+          isAuthenticated: false,
+          name: null,
+          email: null
+        })
       }
     }
     getData()
+    //eslint-disable
   }, [])
   return (
     <>

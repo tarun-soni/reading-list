@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Container, Nav, Navbar } from 'react-bootstrap'
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { userInfoState } from '../store/login'
 import { useRecoilState } from 'recoil'
 import { logoutUser } from '../actions/userActions'
 const Header = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState)
 
-  // useEffect(() => {
-  //   console.log(`userInfo`, userInfo)
-  // }, [userInfo])
+  useEffect(() => {
+    console.log(`userInfo`, userInfo)
+  }, [userInfo])
 
   const logout = async () => {
     await logoutUser()
@@ -33,12 +33,12 @@ const Header = () => {
 
         <Nav className="ml-auto">
           {userInfo?.isAuthenticated ? (
-            <LinkContainer to="/homescreen">
-              <Nav.Link onClick={logout}>
-                <i className="fas fa-user px-1"></i>
-                LOGOUT
-              </Nav.Link>
-            </LinkContainer>
+            <NavDropdown title={userInfo?.name?.toUpperCase()} id="username">
+              <LinkContainer to="/my-list">
+                <NavDropdown.Item>MY READING LIST</NavDropdown.Item>
+              </LinkContainer>
+              <NavDropdown.Item onClick={logout}>LOGOUT</NavDropdown.Item>
+            </NavDropdown>
           ) : (
             <LinkContainer to="/login">
               <Nav.Link>

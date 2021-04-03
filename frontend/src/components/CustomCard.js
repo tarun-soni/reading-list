@@ -135,7 +135,7 @@ const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
             &times;
           </button>
           <strong>Oh snap!</strong>{' '}
-          <a href="#" class="alert-link">
+          <a href="#/" class="alert-link">
             Change a few things up
           </a>{' '}
           and try submitting again.
