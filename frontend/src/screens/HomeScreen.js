@@ -15,6 +15,7 @@ const HomeScreen = () => {
     const resp = await axios.get(url)
 
     setBooks(resp?.data?.items)
+    console.log('resp?.data?.items :>> ', resp?.data?.items)
   }
 
   return (
@@ -30,10 +31,10 @@ const HomeScreen = () => {
         />
       </Row>
       <Row>
-        {books?.map((book) => (
+        {books?.map((book, index) => (
           <CustomCard
-            key={book?.id}
-            bookId={book?.id}
+            key={index}
+            bookId={book.id}
             title={book?.volumeInfo?.title}
             img={book?.volumeInfo?.imageLinks?.smallThumbnail}
             description={book?.volumeInfo?.description}

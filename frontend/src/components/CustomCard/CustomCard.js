@@ -12,10 +12,13 @@ const CustomCard = ({
   description,
   previewLink,
   categories,
-  fromMyList
+  fromMyList,
+  key
 }) => {
   return (
     <>
+      {console.log(`bookId cc`, bookId)}
+      {console.log(`key`, key)}
       <Card className="m-3 " style={{ width: '20rem' }}>
         <Card.Header className="p-3 d-flex">{title}</Card.Header>
 
@@ -55,12 +58,12 @@ const CustomCard = ({
           className="d-flex align-items-center justify-content-between"
           style={{ height: '3rem' }}
         >
-          <button type="button" class="btn btn-primary btn-sm">
+          <button type="button" className="btn btn-primary btn-sm">
             Preview link
             <Card.Link target="_blank" href={previewLink}></Card.Link>
           </button>
 
-          <button type="button" class="btn btn-outline-secondary btn-sm">
+          <button type="button" className="btn btn-outline-secondary btn-sm">
             <LinkContainer to={`/book/${bookId}`} className="text-black-50">
               <Card.Link>More Info</Card.Link>
             </LinkContainer>
@@ -75,7 +78,7 @@ const CustomCard = ({
             />
           ) : (
             // <></>
-            <RemoveBookBtn />
+            <RemoveBookBtn bookId={bookId} />
           )}
         </Card.Body>
 

@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
 import generateToken from '../utils/generateToken.js'
 //@desc   Auth user & get token
-//route   POST /api/products
+//route   POST /api/user
 //access  PUBLIC
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body

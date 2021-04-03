@@ -36,8 +36,26 @@ const getUserBooks = asyncHandler(async (req, res) => {
     if (err.kind == 'ObjectId') {
       return res.status(400).send({ msg: 'Books Not Found' })
     }
-    console.error('error in note GET BOoks route: >>>>>', err)
+    console.error('error getUserBooks route: >>>>>', err)
     res.status(500).send('Server Error')
   }
 })
-export { createBook, getUserBooks }
+
+// @route       DELETE api/book/:book_id
+// @desc        delete specific bok
+// @access      private
+const deleteBook = asyncHandler(async (req, res) => {
+  try {
+    const book = await Book.findOne({ _id: req.params.book_id })
+    if (book) {
+      await book.remove()
+      res.json({ message: 'Book removed' })
+    } else {
+      res.status(404).send({ message: 'Book Not Found' })
+    }
+  } catch (err) {
+    console.error('error in route post delete book ', err)
+  }
+})
+
+export { createBook, getUserBooks, deleteBook }

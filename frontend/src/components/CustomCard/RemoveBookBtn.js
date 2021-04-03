@@ -1,8 +1,24 @@
 import React from 'react'
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { useRecoilState } from 'recoil'
+import { deleteBook } from '../../actions/bookActions'
+import { loadingState } from '../../store/loading'
 
-const RemoveBookBtn = () => {
-  const removeBookFunction = () => {}
+const RemoveBookBtn = ({ bookId }) => {
+  const [loading, setLoading] = useRecoilState(loadingState)
+
+  const removeBookFunction = async () => {
+    setLoading(true)
+    console.log('bookId btn :>> ', bookId)
+    const deleteRes = await deleteBook(bookId)
+    if (deleteRes === 'success') {
+      console.log('book deletedddd')
+      setLoading(false)
+    } else {
+      console.log('deleteRes :>> ', deleteRes)
+      setLoading(false)
+    }
+  }
 
   return (
     <>

@@ -4,11 +4,12 @@ import { useRecoilState } from 'recoil'
 import { getUserBooks } from '../actions/bookActions'
 import CustomCard from '../components/CustomCard/CustomCard'
 import Loader from '../components/Loader'
+import { loadingState } from '../store/loading'
 import { userInfoState } from '../store/login'
 
 const MyList = () => {
   const [userInfo] = useRecoilState(userInfoState)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useRecoilState(loadingState)
   const [userBooks, setUserBooks] = useState(null)
   useEffect(() => {
     setLoading(true)
@@ -18,7 +19,7 @@ const MyList = () => {
       setUserBooks(responseBooks)
     }
     getData().then(setLoading(false))
-  }, [userInfo.userId])
+  }, [userInfo.userId, loading])
 
   return (
     <div>
@@ -32,8 +33,8 @@ const MyList = () => {
       <Row>
         {userBooks?.map((book) => (
           <CustomCard
-            key={book?.bookId}
-            bookId={book?.id}
+            key={book._id}
+            bookId={book._id}
             title={book?.title}
             img={book?.imageUrl}
             description={book?.description}
