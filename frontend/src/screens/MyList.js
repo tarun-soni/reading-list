@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useRecoilState } from 'recoil'
 import { getUserBooks } from '../actions/bookActions'
-import CustomCard from '../components/CustomCard'
+import CustomCard from '../components/CustomCard/CustomCard'
 import Loader from '../components/Loader'
 import { userInfoState } from '../store/login'
 
 const MyList = () => {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState)
+  const [userInfo] = useRecoilState(userInfoState)
   const [loading, setLoading] = useState(false)
   const [userBooks, setUserBooks] = useState(null)
   useEffect(() => {
     setLoading(true)
     async function getData() {
-      const responseBooks = await getUserBooks(userInfo?.userId)
+      const responseBooks = await getUserBooks(userInfo.userId)
       console.log('responseBooks :>> ', responseBooks)
       setUserBooks(responseBooks)
     }
@@ -38,6 +38,8 @@ const MyList = () => {
             img={book?.imageUrl}
             description={book?.description}
             previewLink={book?.previewLink}
+            fromMyList={true}
+
             // categories={book?.categories?}
           />
         ))}

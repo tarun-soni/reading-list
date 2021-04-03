@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Col, Row } from 'react-bootstrap'
 import axios from 'axios'
-import CustomCard from '../components/CustomCard'
+import CustomCard from '../components/CustomCard/CustomCard'
 import SearchBox from '../components/SearchBox'
 import { getUserById } from '../actions/userActions'
 import { useRecoilState } from 'recoil'
@@ -70,6 +70,7 @@ const HomeScreen = () => {
             description={book?.volumeInfo?.description}
             previewLink={book?.volumeInfo?.previewLink}
             categories={book?.volumeInfo?.categories}
+            fromMyList={false}
           />
         ))}
       </Row>
