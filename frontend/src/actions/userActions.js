@@ -29,18 +29,17 @@ const loginUser = async (email, password) => {
 
 const getUserById = async (id) => {
   const token = localStorage.getItem('userToken')
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
-  }
   try {
-    const response = await axios.get(`/api/users/${id}`, config)
-    console.log('user :>> ', response)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const { data } = await axios.get(`/api/users/${id}`, config)
 
-    // if (data) return data
-    // else return null
+    if (data) return data
+    else return null
   } catch (err) {
     console.log('err :>> ', err)
   }

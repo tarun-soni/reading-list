@@ -10,8 +10,9 @@ export const addBook = async (bookData) => {
     const response = await axios.post(`/api/book`, bookData, config)
     console.log('bookData response :>> ', response)
 
-    // if (data) return data
-    // else return null
+    if (response?.status === 201) {
+      return 'success'
+    } else return 'failed'
   } catch (error) {
     console.log('error :>> ', error)
   }

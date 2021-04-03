@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Col, Row } from 'react-bootstrap'
 import axios from 'axios'
 import CustomCard from '../components/CustomCard'
 import SearchBox from '../components/SearchBox'
+import { getUserById } from '../actions/userActions'
 const HomeScreen = () => {
   const [bookInput, setBookInput] = useState('harry potter')
   const [books, setBooks] = useState()
@@ -16,6 +17,16 @@ const HomeScreen = () => {
 
     setBooks(resp?.data?.items)
   }
+
+  useEffect(() => {
+    async function getData() {
+      if (localStorage.getItem('userId') && localStorage.getItem('userToken')) {
+        const res = await getUserById(localStorage.getItem('userId'))
+        console.log('res :>> ', res)
+      }
+    }
+    getData()
+  }, [])
   return (
     <>
       <Row>

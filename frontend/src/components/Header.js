@@ -7,9 +7,9 @@ import { logoutUser } from '../actions/userActions'
 const Header = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState)
 
-  useEffect(() => {
-    console.log(`userInfo`, userInfo)
-  }, [userInfo])
+  // useEffect(() => {
+  //   console.log(`userInfo`, userInfo)
+  // }, [userInfo])
 
   const logout = async () => {
     await logoutUser()
@@ -32,7 +32,6 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Nav className="ml-auto">
-          {console.log(`userInfo`, userInfo)}
           {userInfo?.isAuthenticated ? (
             <LinkContainer to="/homescreen">
               <Nav.Link onClick={logout}>

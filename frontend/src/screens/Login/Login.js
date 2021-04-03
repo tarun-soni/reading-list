@@ -27,7 +27,8 @@ const Login = () => {
         name: loginInfo.name,
         email: loginInfo.email
       })
-      localStorage.setItem('userToken', JSON.stringify(loginInfo.token))
+      localStorage.setItem('userToken', loginInfo.token)
+      localStorage.setItem('userId', loginInfo._id)
     }
     if (loginInfo === undefined || null) {
       // todo wrong email pass alert popup
