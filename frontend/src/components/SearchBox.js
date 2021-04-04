@@ -6,7 +6,10 @@ const SearchBox = ({ bookInput, setBookInput, searchSubmit }) => {
     searchSubmit()
   }
   return (
-    <form className="form-inline my-2 my-lg-0" onSubmit={submitHandler}>
+    <form
+      className="form-inline my-2 my-lg-0 float-right"
+      onSubmit={submitHandler}
+    >
       <input
         value={bookInput}
         onChange={(e) => setBookInput(e.target.value)}
