@@ -24,6 +24,7 @@ export const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
       setShowPlsLoginAlert(true)
     } else {
       const response = await addBook(bookData)
+      console.log('add book response :>> ', response)
       setAddBookAlert(true)
     }
   }
