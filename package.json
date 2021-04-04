@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Personalised reading list",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "none",
   "author": "Tarun Soni <soni.tarun26@gmail.com>",
   "license": "MIT",
