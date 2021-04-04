@@ -5,13 +5,18 @@ import { userInfoState } from '../store/login'
 import { useRecoilState } from 'recoil'
 import { logoutUser } from '../actions/userActions'
 import { useHistory } from 'react-router-dom'
-import Message from './Message'
 import CustomToast from './CustomToast'
-import { addedBookAlert } from '../store/alerts'
+import { addedBookAlert, plsLoginAlert, removeBookAlert } from '../store/alerts'
 
 const Header = () => {
   const [addBookAlertState, setAddBookAlert] = useRecoilState(addedBookAlert)
   const [userInfo, setUserInfo] = useRecoilState(userInfoState)
+  const [showPlsLoginAlert, setShowPlsLoginAlert] = useRecoilState(
+    plsLoginAlert
+  )
+  const [removeBookAlertState, setRemoveBookAlert] = useRecoilState(
+    removeBookAlert
+  )
   const history = useHistory()
   useEffect(() => {
     console.log(`userInfo`, userInfo)
@@ -31,12 +36,27 @@ const Header = () => {
 
   return (
     <Navbar className="font-weight-bold" bg="light sticky-top" collapseOnSelect>
-      {addBookAlertState && (
-        <>
-          <CustomToast onClick={() => setAddBookAlert(false)} />
-        </>
+      {showPlsLoginAlert && (
+        <CustomToast
+          variant="danger"
+          onClose={() => setShowPlsLoginAlert(false)}
+          msg="Please Login to add Books"
+        />
       )}
-
+      {addBookAlertState && (
+        <CustomToast
+          variant="success"
+          onClose={() => setAddBookAlert(false)}
+          msg="Book Added to your Reading list"
+        />
+      )}
+      {removeBookAlertState && (
+        <CustomToast
+          variant="info"
+          onClose={() => setRemoveBookAlert(false)}
+          msg="Book Removed from your Reading list"
+        />
+      )}
       <Container>
         <LinkContainer to="/homescreen">
           <Navbar.Brand>Perosnal Reading App</Navbar.Brand>

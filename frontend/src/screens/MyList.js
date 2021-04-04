@@ -4,17 +4,11 @@ import { useRecoilState } from 'recoil'
 import { getUserBooks } from '../actions/bookActions'
 import CustomCard from '../components/CustomCard/CustomCard'
 import Loader from '../components/Loader'
-import Message from '../components/Message.js'
-import { removeBookAlert } from '../store/alerts'
 import { loadingState } from '../store/loading'
 import { userInfoState } from '../store/login'
 
 const MyList = () => {
   const [userInfo] = useRecoilState(userInfoState)
-
-  const [removeBookAlertState, setRemoveBookAlert] = useRecoilState(
-    removeBookAlert
-  )
 
   const [loading, setLoading] = useRecoilState(loadingState)
 
@@ -33,11 +27,7 @@ const MyList = () => {
   return (
     <div>
       {loading && <Loader />}
-      {removeBookAlertState && (
-        <Message onClose={() => setRemoveBookAlert(false)}>
-          Book Removed
-        </Message>
-      )}
+
       <Row>
         <Col md={8}>
           <h3>MY Books</h3>

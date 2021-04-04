@@ -4,16 +4,9 @@ import { Col, Row } from 'react-bootstrap'
 import axios from 'axios'
 import CustomCard from '../components/CustomCard/CustomCard'
 import SearchBox from '../components/SearchBox'
-import Message from '../components/Message'
 
-import { useRecoilState } from 'recoil'
-import { removeBookAlert, addedBookAlert, plsLoginAlert } from '../store/alerts'
 const HomeScreen = () => {
   const [bookInput, setBookInput] = useState('harry potter')
-  const [showPlsLoginAlert, setShowPlsLoginAlert] = useRecoilState(
-    plsLoginAlert
-  )
-  const [addBookAlertState, setAddBookAlert] = useRecoilState(addedBookAlert)
 
   const [books, setBooks] = useState()
   async function searchSubmit() {
@@ -23,24 +16,10 @@ const HomeScreen = () => {
     const resp = await axios.get(url)
 
     setBooks(resp?.data?.items)
-    console.log('resp?.data?.items :>> ', resp?.data?.items)
   }
 
   return (
     <>
-      {showPlsLoginAlert && (
-        <Message variant="danger" onClose={() => setShowPlsLoginAlert(false)}>
-          Please Login to add Books
-        </Message>
-      )}
-      {addBookAlertState && (
-        <>
-          <Message variant="success" onClose={() => setAddBookAlert(false)}>
-            Book Added
-          </Message>
-        </>
-      )}
-
       <Row>
         <Col md={4} lg={8}>
           <h3>Books</h3>
