@@ -19,7 +19,6 @@ const loginUser = async (email, password) => {
       { email, password },
       config
     )
-    console.log('userlogindata :>> ', data)
 
     if (data) return data
     else return null

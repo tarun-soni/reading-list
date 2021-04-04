@@ -18,10 +18,11 @@ const MyList = () => {
     setLoading(true)
     async function getData() {
       const responseBooks = await getUserBooks(userInfo.userId)
-      console.log('responseBooks :>> ', responseBooks)
       setUserBooks(responseBooks)
     }
-    getData().then(setLoading(false))
+    getData()
+    setLoading(false)
+    // eslint-disable-next-line
   }, [userInfo.userId, loading])
 
   return (

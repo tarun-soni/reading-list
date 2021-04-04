@@ -22,7 +22,7 @@ const HomeScreen = () => {
     <>
       <Row>
         <Col md={4} lg={8}>
-          <h3>Books</h3>
+          <h3> Search Books</h3>
         </Col>
         <Col>
           <SearchBox

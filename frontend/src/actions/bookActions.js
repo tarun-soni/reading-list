@@ -11,7 +11,6 @@ export const addBook = async (bookData) => {
     }
 
     const response = await axios.post(`/api/book`, bookData, config)
-    console.log('bookData response :>> ', response)
 
     if (response?.status === 201) {
       return 'success'
@@ -32,7 +31,6 @@ export const getUserBooks = async (user_id) => {
     }
 
     const response = await axios.get(`/api/book/user/${user_id}`, config)
-    console.log('bookData response :>> ', response)
 
     if (response?.status === 200) {
       return response.data
@@ -46,7 +44,6 @@ export const deleteBook = async (book_id) => {
   try {
     const token = localStorage.getItem('userToken')
 
-    console.log('book_id :>> ', book_id)
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +52,6 @@ export const deleteBook = async (book_id) => {
     }
 
     const response = await axios.delete(`/api/book/${book_id}`, config)
-    console.log('bookData response :>> ', response)
 
     if (response?.status === 200) {
       return 'success'

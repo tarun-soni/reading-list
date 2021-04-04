@@ -12,7 +12,6 @@ export const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
 
   const addBookFunction = async () => {
     const user = await getUserById(userInfo.userId)
-    console.log('clicked')
     const bookData = {
       user,
       title,
@@ -24,9 +23,7 @@ export const AddBookBtn = ({ title, imageUrl, description, bookId }) => {
     if (!userInfo.isAuthenticated) {
       setShowPlsLoginAlert(true)
     } else {
-      console.log('bookData :>> ', bookData)
       const response = await addBook(bookData)
-      console.log('response :>> ', response)
       setAddBookAlert(true)
     }
   }

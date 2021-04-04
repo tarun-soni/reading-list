@@ -26,10 +26,7 @@ const App = () => {
           name: res?.name,
           email: res?.email
         })
-
-        console.log('res :>> ', res)
       } else {
-        console.log('logged out')
         setUserInfo({
           token: null,
           userId: null,

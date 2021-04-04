@@ -14,10 +14,10 @@ const CustomToast = ({ onClose, variant, msg }) => {
     setTimeout(() => {
       onClose()
     }, 3000)
-  }, [])
+  }, [onClose])
   return (
     <div
-      class="toast show"
+      className="toast show"
       role="alert"
       aria-live="assertive"
       aria-atomic="true"
@@ -34,7 +34,7 @@ const CustomToast = ({ onClose, variant, msg }) => {
       }}
     >
       <div
-        class="toast-header"
+        className="toast-header"
         style={{
           backgroundColor:
             variant === 'info'
@@ -44,11 +44,10 @@ const CustomToast = ({ onClose, variant, msg }) => {
               : colors.dangerColorTop
         }}
       >
-        {/* <h5 class="mr-auto text-black">Bootstrap</h5> */}
-        <div class=" mr-auto toast-body text-white">{msg}</div>
+        <div className=" mr-auto toast-body text-white">{msg}</div>
         <button
           type="button"
-          class="ml-2 mb-1 close text-white"
+          className="ml-2 mb-1 close text-white"
           data-dismiss="toast"
           aria-label="Close"
           onClick={onClose}

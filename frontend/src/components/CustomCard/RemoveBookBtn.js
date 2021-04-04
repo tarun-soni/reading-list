@@ -6,19 +6,16 @@ import { removeBookAlert } from '../../store/alerts'
 import { loadingState } from '../../store/loading'
 
 const RemoveBookBtn = ({ bookId }) => {
-  const [loading, setLoading] = useRecoilState(loadingState)
+  const [, setLoading] = useRecoilState(loadingState)
   const [, setRemoveBookAlert] = useRecoilState(removeBookAlert)
   const removeBookFunction = async () => {
     setLoading(true)
-    console.log('bookId btn :>> ', bookId)
     const deleteRes = await deleteBook(bookId)
     if (deleteRes === 'success') {
       setRemoveBookAlert(true)
 
-      console.log('book deletedddd')
       setLoading(false)
     } else {
-      console.log('deleteRes :>> ', deleteRes)
       setLoading(false)
     }
   }

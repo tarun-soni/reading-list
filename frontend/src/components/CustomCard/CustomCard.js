@@ -12,13 +12,10 @@ const CustomCard = ({
   description,
   previewLink,
   categories,
-  fromMyList,
-  key
+  fromMyList
 }) => {
   return (
     <>
-      {console.log(`bookId cc`, bookId)}
-      {console.log(`key`, key)}
       <Card className="m-3 " style={{ width: '20rem' }}>
         <Card.Header className="p-3 d-flex">{title}</Card.Header>
 

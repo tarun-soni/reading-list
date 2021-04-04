@@ -18,9 +18,6 @@ const Header = () => {
     removeBookAlert
   )
   const history = useHistory()
-  useEffect(() => {
-    console.log(`userInfo`, userInfo)
-  }, [userInfo])
 
   const logout = async () => {
     await logoutUser()
@@ -59,7 +56,7 @@ const Header = () => {
       )}
       <Container>
         <LinkContainer to="/homescreen">
-          <Navbar.Brand>Perosnal Reading App</Navbar.Brand>
+          <Navbar.Brand>Perosnal Reading Collection</Navbar.Brand>
         </LinkContainer>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
