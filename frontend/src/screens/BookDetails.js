@@ -3,22 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import ReadMoreAndLess from 'react-read-more-less'
 
-import {
-  Container,
-  Button,
-  Card,
-  Col,
-  Form,
-  Image,
-  ListGroup,
-  Row
-} from 'react-bootstrap'
+import { Container, Col, Image, ListGroup, Row } from 'react-bootstrap'
 import { AddBookBtn } from '../components/CustomCard/AddBookBtn'
 import { useRecoilState } from 'recoil'
 import { userInfoState } from '../store/login'
 import { addedBookAlert, plsLoginAlert } from '../store/alerts'
 import { getUserById } from '../actions/userActions'
 import { addBook } from '../actions/bookActions'
+import { Link } from 'react-router-dom'
 const BookDetails = () => {
   const { id } = useParams()
   const [book, setBook] = useState()
@@ -76,17 +68,19 @@ const BookDetails = () => {
               <h5>Language : {book?.volumeInfo?.language}</h5>
             </ListGroup.Item>
             <ListGroup.Item>
-              Publisher {''}
+              <h4> Publisher {''} </h4>
               {book?.volumeInfo?.publisher}
               <br />
               Date:
               {book?.volumeInfo?.publishedDate}
             </ListGroup.Item>
             <ListGroup.Item>
-              preview lInk: {book?.volumeInfo?.previewLink}
+              <a target="_blank" href={book?.volumeInfo?.previewLink}>
+                Preview Link
+              </a>
             </ListGroup.Item>
             <ListGroup.Item>
-              Description:
+              <h4>Description:</h4>
               {book?.volumeInfo?.description != null ? (
                 <ReadMoreAndLess
                   className="read-more-content"
@@ -101,7 +95,7 @@ const BookDetails = () => {
               )}
             </ListGroup.Item>
             <ListGroup.Item>
-              Author(s)
+              <h4>Author(s)</h4>
               {book?.volumeInfo?.authors?.map((a, index) => (
                 <p key={index}>{a}</p>
               ))}

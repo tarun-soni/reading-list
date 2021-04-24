@@ -65,12 +65,13 @@ const CustomCard = ({
             </Card.Link>
           </button>
 
-          <button type="button" className="btn btn-outline-secondary btn-sm">
-            <LinkContainer to={`/book/${bookId}`} className="text-black-50">
-              <Card.Link>More Info</Card.Link>
-            </LinkContainer>
-          </button>
-
+          {!fromMyList && (
+            <button type="button" className="btn btn-outline-secondary btn-sm">
+              <LinkContainer to={`/book/${bookId}`} className="text-black-50">
+                <Card.Link>More Info</Card.Link>
+              </LinkContainer>
+            </button>
+          )}
           {!fromMyList ? (
             <AddBookBtn
               bookId={bookId}

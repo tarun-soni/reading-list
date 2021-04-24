@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { registerUser } from '../../actions/userActions'
 import { userInfoState } from '../../store/login'
