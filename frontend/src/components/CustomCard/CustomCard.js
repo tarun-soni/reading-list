@@ -56,8 +56,13 @@ const CustomCard = ({
           style={{ height: '3rem' }}
         >
           <button type="button" className="btn btn-primary btn-sm">
-            Preview link
-            <Card.Link target="_blank" href={previewLink}></Card.Link>
+            <Card.Link
+              target="_blank"
+              href={previewLink}
+              className="text-white"
+            >
+              Preview link
+            </Card.Link>
           </button>
 
           <button type="button" className="btn btn-outline-secondary btn-sm">

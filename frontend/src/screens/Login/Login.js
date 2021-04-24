@@ -9,8 +9,8 @@ import './cssLogin.scss'
 const Login = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState)
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: 'u1@example.com',
+    password: '1212'
   })
 
   const { email, password } = formData
@@ -43,9 +43,14 @@ const Login = () => {
     <>
       <Container className="form-container">
         <Form className="login-form" onSubmit={onSubmit}>
-          <Form.Label>Email</Form.Label>
+          <Form.Label
+            className="align-self-baseline font-weight-bold"
+            htmlFor="email"
+          >
+            Email
+          </Form.Label>
           <Form.Control
-            className="w-100 m-2"
+            className="w-100 m-1"
             type="email"
             placeholder="enter email"
             name="email"
@@ -53,9 +58,14 @@ const Login = () => {
             value={email}
             onChange={(e) => onChange(e)}
           ></Form.Control>
-          <Form.Label htmlFor="email">Password</Form.Label>
+          <Form.Label
+            className="align-self-baseline font-weight-bold mt-2"
+            htmlFor="password"
+          >
+            Password
+          </Form.Label>
           <Form.Control
-            className="w-100 m-2"
+            className="w-100 m-1"
             type="password"
             placeholder="Password"
             name="password"
@@ -63,20 +73,24 @@ const Login = () => {
             value={password}
             onChange={(e) => onChange(e)}
           ></Form.Control>
-          <Button type="submit" variant="success">
+          <Button
+            type="submit"
+            variant="success"
+            className="w-100 mt-4 lspace-small"
+          >
             Login
           </Button>
         </Form>
         <div className="features">
           <div className="feature">
             <i className="fas fa-database"></i>
-            <h3>Store Notes</h3>
-            <p>Permanently Store notes and access anytime.</p>
+            <h3>Store your Reading List</h3>
+            <p>Permanently Store book list and access anytime.</p>
           </div>
           <div className="feature">
             <i className="fa fa-check-circle" aria-hidden="true"></i>
             <h3>Sign up and Login</h3>
-            <p>Login to see and edit all notes.</p>
+            <p>Login to see and edit list.</p>
           </div>
         </div>
       </Container>
