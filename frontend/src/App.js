@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import BookDetails from './screens/BookDetails'
 import Login from './screens/Login/Login.js'
+import Register from './screens/Login/Register.js'
 import MyList from './screens/MyList'
 import { useEffect } from 'react'
 import { getUserById } from './actions/userActions'
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/homescreen" component={HomeScreen} exact />
           <Route path="/my-list" component={MyList} exact />
           <Route path="/login" component={Login} exact />
+          <Route path="/register" component={Register} exact />
           <Route path="/book/:id" component={BookDetails} exact />
         </Container>
       </main>

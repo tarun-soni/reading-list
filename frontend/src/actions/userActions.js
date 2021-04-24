@@ -1,6 +1,25 @@
 import axios from 'axios'
 
-// const registerUser = (formData) => {}
+const registerUser = async (name, email, password) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const { data } = await axios.post(
+      `/api/users`,
+      { name, email, password },
+      config
+    )
+
+    if (data) return data
+    else return null
+  } catch (err) {
+    console.log('err :>> ', err)
+  }
+}
 
 const logoutUser = async () => {
   localStorage.removeItem('userToken')
@@ -45,4 +64,4 @@ const getUserById = async (id) => {
   }
 }
 
-export { loginUser, logoutUser, getUserById }
+export { loginUser, logoutUser, getUserById, registerUser }

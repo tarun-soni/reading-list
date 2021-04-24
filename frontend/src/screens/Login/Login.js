@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { loginUser } from '../../actions/userActions.js'
 import { userInfoState } from '../../store/login.js'
@@ -80,6 +80,9 @@ const Login = () => {
           >
             Login
           </Button>
+          <h6 className="my-2">
+            Don't have an account? <Link to={'/register'}>Sign up </Link>
+          </h6>
         </Form>
         <div className="features">
           <div className="feature">

@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { Button, Container, Form } from 'react-bootstrap'
 
 import { Link, Redirect } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { registerUser } from '../../actions/userActions'
+import { userInfoState } from '../../store/login'
 
-import { register } from '../../actions/auth'
 const Register = () => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState)
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,58 +21,85 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    dispatch(register(formData))
+    const registerInfo = await registerUser(name, email, password)
+    if (registerInfo) {
+      setUserInfo({
+        userId: registerInfo._id,
+        isAuthenticated: true,
+        token: registerInfo.token,
+        name: registerInfo.name,
+        email: registerInfo.email
+      })
+      localStorage.setItem('userToken', registerInfo.token)
+      localStorage.setItem('userId', registerInfo._id)
+    }
+    if (registerInfo === undefined || null) {
+    }
   }
-
   if (userInfo.isAuthenticated || localStorage.getItem('userToken')) {
     return <Redirect to="/homescreen" />
   }
   return (
     <>
-      <div className="container">
-        <div className="form-control">
-          <form onSubmit={(e) => onSubmit(e)}>
-            <div className="form-control">
-              <label htmlFor="Name">Name</label>
+      <Container className="form-container">
+        <Form className="login-form" onSubmit={onSubmit}>
+          <Form.Label
+            className="align-self-baseline font-weight-bold"
+            htmlFor="name"
+          >
+            Name
+          </Form.Label>
 
-              <input
-                type="text"
-                placeholder="Enter your Name"
-                name="name"
-                id="name"
-                value={name}
-                onChange={(e) => onChange(e)}
-              />
-            </div>
+          <Form.Control
+            className="w-100 m-1"
+            type="text"
+            placeholder="Enter your Name"
+            name="name"
+            id="name"
+            value={name}
+            onChange={(e) => onChange(e)}
+          />
 
-            <div className="form-control">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                name="email"
-                value={email}
-                autoComplete="off"
-                onChange={(e) => onChange(e)}
-              />
-            </div>
+          <Form.Label
+            className="align-self-baseline font-weight-bold"
+            htmlFor="email"
+          >
+            Email
+          </Form.Label>
+          <Form.Control
+            className="w-100 m-1"
+            type="email"
+            placeholder="enter email"
+            name="email"
+            minLength="4"
+            value={email}
+            onChange={(e) => onChange(e)}
+          ></Form.Control>
 
-            <div className="form-control">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                placeholder="Enter password (min. length 6)"
-                name="password"
-                autoComplete="new-password"
-                minLength="6"
-                value={password}
-                onChange={(e) => onChange(e)}
-              />
-            </div>
-            <input type="submit" className="btn" value="Register" />
-          </form>
-        </div>
-      </div>
+          <Form.Label
+            className="align-self-baseline font-weight-bold mt-2"
+            htmlFor="password"
+          >
+            Password
+          </Form.Label>
+          <Form.Control
+            className="w-100 m-1"
+            type="password"
+            placeholder="Password"
+            name="password"
+            minLength="4"
+            value={password}
+            onChange={(e) => onChange(e)}
+          ></Form.Control>
+          <Button
+            type="submit"
+            variant="success"
+            className="w-100 mt-4 lspace-small"
+          >
+            Register
+          </Button>
+        </Form>
+      </Container>
     </>
   )
 }
