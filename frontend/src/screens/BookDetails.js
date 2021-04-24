@@ -4,13 +4,11 @@ import { useParams } from 'react-router'
 import ReadMoreAndLess from 'react-read-more-less'
 
 import { Container, Col, Image, ListGroup, Row } from 'react-bootstrap'
-import { AddBookBtn } from '../components/CustomCard/AddBookBtn'
 import { useRecoilState } from 'recoil'
 import { userInfoState } from '../store/login'
 import { addedBookAlert, plsLoginAlert } from '../store/alerts'
 import { getUserById } from '../actions/userActions'
 import { addBook } from '../actions/bookActions'
-import { Link } from 'react-router-dom'
 const BookDetails = () => {
   const { id } = useParams()
   const [book, setBook] = useState()
@@ -75,7 +73,11 @@ const BookDetails = () => {
               {book?.volumeInfo?.publishedDate}
             </ListGroup.Item>
             <ListGroup.Item>
-              <a target="_blank" href={book?.volumeInfo?.previewLink}>
+              <a
+                target="_blank"
+                href={book?.volumeInfo?.previewLink}
+                rel="noreferrer"
+              >
                 Preview Link
               </a>
             </ListGroup.Item>
