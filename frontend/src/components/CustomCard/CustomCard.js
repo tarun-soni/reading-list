@@ -26,7 +26,7 @@ const CustomCard = ({
           {img ? (
             <Card.Img
               className="border-black"
-              style={{ width: 'auto' }}
+              style={{ maxWidth: '10rem' }}
               src={img}
             />
           ) : (
